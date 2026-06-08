@@ -4,10 +4,11 @@ A lightweight Windows system tray utility that displays real-time memory usage.
 
 ## Features
 
-- Dynamic tray icon showing memory percentage (0-100)
-- Color-coded indicators: Green (<70%), Yellow (70-80%), Orange (80-85%), Red (>85%)
-- Top 5 memory-consuming processes in the context menu
-- Auto-refreshes every 3 seconds
+- Dynamic tray icon with color-coded percentage and arc progress ring
+- Color-coded indicators: ≤60% Green, 60-75% Green→Yellow, 75-85% Yellow→Orange, 85-95% Orange→Red, >95% Red
+- Hover tooltip shows memory percentage, used/total GB, and swap usage
+- Auto-refreshes every 2 seconds
+- Right-click menu: Exit
 
 ## Requirements
 
