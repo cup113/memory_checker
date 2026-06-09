@@ -1,12 +1,14 @@
 from __future__ import annotations
 
-import time
 import threading
+import time
 
 import psutil
-from PIL import Image, ImageDraw, ImageFont
 import pystray
+from PIL import Image, ImageDraw, ImageFont
 from pystray import MenuItem as item
+
+VERSION = "1.0.0"
 
 
 # --- 1. 颜色插值 ---
@@ -36,9 +38,7 @@ def generate_icon(percent: float) -> Image.Image:
 
     m = 2
     if hasattr(draw, "rounded_rectangle"):
-        draw.rounded_rectangle(
-            (m, m, w - m, h - m), radius=8, fill=(*color, 200)
-        )
+        draw.rounded_rectangle((m, m, w - m, h - m), radius=8, fill=(*color, 200))
     else:
         draw.rectangle((m, m, w - m, h - m), fill=(*color, 200))
 
@@ -86,11 +86,12 @@ def main() -> None:
     initial_percent = psutil.virtual_memory().percent
     icon_image = generate_icon(initial_percent)
 
-    menu = pystray.Menu(item("❌ Exit", exit_action))
-
-    tray_icon = pystray.Icon(
-        "MemMonitor", icon_image, f"Memory: {initial_percent}%", menu=menu
+    menu = pystray.Menu(
+        item(f"Memory Checker v{VERSION}", None, enabled=False),
+        item("❌ Exit", exit_action),
     )
+
+    tray_icon = pystray.Icon("MemMonitor", icon_image, f"Memory: {initial_percent}%", menu=menu)
 
     threading.Thread(target=update_loop, args=(tray_icon,), daemon=True).start()
     tray_icon.run()

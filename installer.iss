@@ -14,9 +14,11 @@ SetupIconFile=favicon.ico
 UninstallDisplayIcon={app}\favicon.ico
 Compression=lzma
 SolidCompression=yes
+PrivilegesRequired=lowest
 
 [Tasks]
 Name: desktopicon; Description: "Create desktop shortcut"; GroupDescription: "Additional icons:"
+Name: autostart; Description: "Start with Windows"; GroupDescription: "Startup options:"
 
 [Files]
 Source: "dist\main.dist\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
@@ -26,6 +28,9 @@ Source: "favicon.ico"; DestDir: "{app}"; Flags: ignoreversion
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
+
+[Registry]
+Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueType: string; ValueName: "{#MyAppName}"; ValueData: "{app}\{#MyAppExeName}"; Tasks: autostart
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "Launch {#MyAppName}"; Flags: nowait postinstall skipifsilent
