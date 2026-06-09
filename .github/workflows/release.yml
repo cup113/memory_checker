@@ -25,6 +25,7 @@ jobs:
             --output-dir=dist `
             --assume-yes-for-downloads `
             --windows-icon-from-ico=favicon.ico `
+            --windows-disable-console `
             main.pyw
 
       - name: Pack with Inno Setup

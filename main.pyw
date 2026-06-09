@@ -8,7 +8,7 @@ import pystray
 from PIL import Image, ImageDraw, ImageFont
 from pystray import MenuItem as item
 
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 
 
 # --- 1. 颜色插值 ---

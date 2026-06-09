@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.1] - 2026-06-09
+
+### Fixed
+- Nuitka build: add `--windows-disable-console` flag to suppress console window
+
 ## [1.0.0] - 2026-06-09
 
 ### Added
