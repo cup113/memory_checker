@@ -1,0 +1,41 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt nuitka
+
+      - name: Build standalone with Nuitka
+        run: |
+          python -m nuitka --standalone `
+            --output-dir=dist `
+            --assume-yes-for-downloads `
+            --windows-icon-from-ico=favicon.ico `
+            main.pyw
+
+      - name: Pack with Inno Setup
+        run: iscc /DAPP_VERSION="${{ github.ref_name }}" installer.iss
+
+      - name: Create Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ github.ref_name }}" `
+            --title "${{ github.ref_name }}" `
+            --generate-notes
+          gh release upload "${{ github.ref_name }}" `
+            "output\MemoryChecker-Setup-${{ github.ref_name }}.exe"
