@@ -1,5 +1,11 @@
 # Memory Checker
 
+[![Python](https://img.shields.io/badge/python-3.12-blue)]()
+[![License](https://img.shields.io/github/license/cup113/memory_checker)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/cup113/memory_checker)](https://github.com/cup113/memory_checker/releases)
+[![Last Commit](https://img.shields.io/github/last-commit/cup113/memory_checker)](https://github.com/cup113/memory_checker/commits)
+[![Platform](https://img.shields.io/badge/platform-Windows-blue)]()
+
 A lightweight Windows system tray utility that displays real-time memory usage.
 
 ## Features
